@@ -1,0 +1,157 @@
+package {
+    default_applicable_licenses: ["packages_modules_NeuralNetworks_license"],
+}
+
+license {
+    name: "packages_modules_NeuralNetworks_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+        "SPDX-license-identifier-BSD",
+        "SPDX-license-identifier-MPL",
+        "SPDX-license-identifier-MPL-2.0",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}
+
+prebuilt_apex {
+    name: "com.android.neuralnetworks",
+    apex_name: "com.android.neuralnetworks",
+    source_apex_name: "com.android.neuralnetworks",
+    arch: {
+        x86_64: {
+            src: "com.android.neuralnetworks.apex",
+        },
+    },
+    filename: "com.android.neuralnetworks.apex",
+    prefer: true,
+    installable: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libneuralnetworks",
+    arch: {
+        x86_64: {
+            srcs: ["lib64/libneuralnetworks.so"],
+        },
+    },
+    export_include_dirs: ["runtime/include"],
+    prefer: true,
+    apex_available: [
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+        "//apex_available:platform",
+    ],
+    stubs: {
+        versions: [
+            "30",
+            "31",
+        ],
+        symbol_file: "runtime/libneuralnetworks.map.txt",
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "libneuralnetworks_packageinfo",
+    arch: {
+        x86_64: {
+            srcs: ["lib64/libneuralnetworks_packageinfo.so"],
+        },
+    },
+    export_include_dirs: ["runtime/include"],
+    prefer: true,
+    apex_available: [
+        "com.android.neuralnetworks",
+        "//apex_available:platform",
+    ],
+}
+
+cc_prebuilt_library_static {
+    name: "libneuralnetworks_common",
+    arch: {
+        x86_64: {
+            srcs: ["lib64/libneuralnetworks_common.a"],
+        },
+    },
+    export_include_dirs: ["common/include"],
+    prefer: true,
+    apex_available: [
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+        "//apex_available:platform",
+    ],
+}
+
+cc_prebuilt_library_static {
+    name: "neuralnetworks_types",
+    arch: {
+        x86_64: {
+            srcs: ["lib64/libneuralnetworks_types.a"],
+        },
+    },
+    export_include_dirs: ["common/types/include"],
+    prefer: true,
+    apex_available: [
+        "com.android.neuralnetworks",
+        "//apex_available:platform",
+    ],
+}
+
+cc_prebuilt_library_static {
+    name: "libneuralnetworks_static",
+    arch: {
+        x86_64: {
+            srcs: ["lib64/libneuralnetworks_common.a"],
+        },
+    },
+    export_include_dirs: ["runtime/include"],
+    prefer: true,
+    apex_available: [
+        "//apex_available:platform",
+    ],
+}
+
+cc_library_headers {
+    name: "libneuralnetworks_headers",
+    host_supported: true,
+    vendor_available: true,
+    export_include_dirs: ["runtime/include"],
+    min_sdk_version: "30",
+    apex_available: [
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+        "//apex_available:platform",
+    ],
+}
+
+cc_library_headers {
+    name: "libneuralnetworks_headers_ndk",
+    host_supported: true,
+    export_include_dirs: ["runtime/include"],
+    sdk_version: "current",
+}
+
+cc_library_headers {
+    name: "libneuralnetworks_private_headers",
+    host_supported: true,
+    export_include_dirs: ["runtime"],
+}
+
+cc_library_headers {
+    name: "libneuralnetworks_common_headers",
+    host_supported: true,
+    export_include_dirs: ["common/include"],
+}
+
+apex_key {
+    name: "com.android.neuralnetworks.key",
+    public_key: "apex/com.android.neuralnetworks.avbpubkey",
+    private_key: "apex/com.android.neuralnetworks.pem",
+}
+
+android_app_certificate {
+    name: "com.android.neuralnetworks.certificate",
+    certificate: "apex/com.android.neuralnetworks",
+}

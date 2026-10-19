@@ -1,0 +1,6 @@
+shadow prebuilt repo: neuralnetworks (target, com.android.neuralnetworks)
+  upstream: packages/modules/NeuralNetworks
+  api-level: 34 (branch 34-20261019)
+  blobs: com.android.neuralnetworks.apex, lib64/libneuralnetworks.so, lib64/libneuralnetworks_packageinfo.so, lib64/libneuralnetworks_common.a, lib64/libneuralnetworks_types.a
+  dev-src: runtime/include, common/include, common/types/include, Android.bp
+  date: 2026-10-19
